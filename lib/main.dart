@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text(
           widget.title,
@@ -68,12 +69,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('EXPENSES'),
                 )),
           )),
+          Card(
+            child: Container(
+              height: 170,
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(decoration: InputDecoration(labelText: 'Title')),
+                  TextField(decoration: InputDecoration(labelText: 'Amount')),
+                  FlatButton(onPressed: () {}, child: Text('Add Transaction'))
+                ],
+              ),
+            ),
+          ),
           Stack(
             children: [
               Opacity(
                 opacity: 0.5,
                 child: Container(
-                  height: 500.0,
+                  height: 450.0,
                   width: double.infinity,
                   child: Card(
                     color: Colors.yellow[400],
