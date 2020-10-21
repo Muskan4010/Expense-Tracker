@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './transaction.dart';
 
 void main() {
@@ -44,96 +45,114 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.red[300],
+        title: Text(
+          widget.title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.red[300],
+            fontSize: 20,
+          ),
+        ),
+        backgroundColor: Colors.yellow[200],
       ),
       body: Column(
         children: [
           Expanded(
-              flex: 3,
+              //flex: 4,
               child: Opacity(
-                opacity: 0.3,
-                child: Container(
-                    width: double.infinity,
-                    child: Card(
-                      color: Colors.red,
-                      child: Text('EXPENSES'),
-                    )),
-              )),
+            opacity: 0.6,
+            child: Container(
+                width: double.infinity,
+                child: Card(
+                  color: Colors.red,
+                  child: Text('EXPENSES'),
+                )),
+          )),
           Stack(
             children: [
               Opacity(
                 opacity: 0.5,
                 child: Container(
-                  height: 400.0,
+                  height: 500.0,
                   width: double.infinity,
                   child: Card(
-                    color: Colors.red,
-                    child: Text('LIST OF TX'),
+                    color: Colors.yellow[400],
+                    child: Text('bottom box'),
                   ),
                 ),
               ),
-              Column(children: [
-                Container(
-                  width: double.infinity,
-                  height: 80,
-                  child: Card(
-                    elevation: 20,
-                    color: Colors.redAccent[300],
-                    child: Text(
-                      'LIST OF TX',
-                      style: TextStyle(
-                        fontSize: 50,
+              Container(
+                  child: Column(children: [
+                Column(children: [
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    child: Card(
+                      elevation: 20,
+                      color: Colors.redAccent[300],
+                      child: Text(
+                        'LIST OF TX',
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.redAccent,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
-                ),
-              ]),
-              Column(
-                children: transaction
-                    .map((tx) => (Card(
-                          child: Row(children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              decoration: BoxDecoration(
-                                  color: Colors.purple, border: Border.all()),
-                              padding: EdgeInsets.all(8),
-                              child: Text(
-                                tx.amount.toString(),
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w200,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                ]),
+                Column(
+                  children: transaction
+                      .map((tx) => (Card(
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
-                                    tx.title,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 8,
-                                      color: Colors.red[400],
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 15),
+                                    decoration: BoxDecoration(
+                                        color: Colors.yellow[100],
+                                        border: Border.all()),
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      '₹${tx.amount}',
+                                      style: TextStyle(
+                                        color: Colors.red[300],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    tx.date.toString(),
-                                    style: TextStyle(
-                                      color: Colors.red[400],
+                                  Container(
+                                    margin: EdgeInsets.all(10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          tx.title,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: Colors.red[400],
+                                          ),
+                                        ),
+                                        Text(
+                                          DateFormat.yMMMMd().format(tx.date),
+                                          style: TextStyle(
+                                            color: Colors.red[200],
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ]),
-                        )))
-                    .toList(),
-              )
+                                ]),
+                          )))
+                      .toList(),
+                )
+              ]))
             ],
           ),
         ],
