@@ -39,8 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
     print(DateTime.now());
   }
 
-  String titleInput;
-  String amountInput;
+  //String titleInput;
+  //String amountInput;
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   TextField(
                     decoration: InputDecoration(
                         labelText: 'Title', border: OutlineInputBorder()),
-                    onChanged: (val) => titleInput = val,
+                    controller: titleController,
+                    //onChanged: (val) => titleInput = val,
                   ),
                   SizedBox(
                     height: 5,
@@ -86,12 +89,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   TextField(
                     decoration: InputDecoration(
                         labelText: 'Amount', border: OutlineInputBorder()),
-                    onChanged: (amt) => amountInput = amt,
+                    controller: amountController,
+                    //onChanged: (amt) => amountInput = amt,
                   ),
                   FlatButton(
                       onPressed: () {
-                        print(titleInput);
-                        print(amountInput);
+                        print(titleController.text);
                       },
                       child: Text('Add Transaction'))
                 ],
