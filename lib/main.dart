@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import './transaction.dart';
@@ -41,6 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
     print(DateTime.now());
   }
 
+  String titleInput;
+  String amountInput;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          Expanded(
-              //flex: 4,
-              child: Opacity(
+          Opacity(
             opacity: 0.6,
             child: Container(
                 width: double.infinity,
@@ -68,17 +67,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.red,
                   child: Text('EXPENSES'),
                 )),
-          )),
+          ),
           Card(
             child: Container(
-              height: 170,
+              height: 190,
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  TextField(decoration: InputDecoration(labelText: 'Title')),
-                  TextField(decoration: InputDecoration(labelText: 'Amount')),
-                  FlatButton(onPressed: () {}, child: Text('Add Transaction'))
+                  TextField(
+                    decoration: InputDecoration(
+                        labelText: 'Title', border: OutlineInputBorder()),
+                    onChanged: (val) => titleInput = val,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                        labelText: 'Amount', border: OutlineInputBorder()),
+                    onChanged: (amt) => amountInput = amt,
+                  ),
+                  FlatButton(
+                      onPressed: () {
+                        print(titleInput);
+                        print(amountInput);
+                      },
+                      child: Text('Add Transaction'))
                 ],
               ),
             ),
